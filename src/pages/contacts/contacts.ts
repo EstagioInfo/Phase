@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ChatPage} from '../chat/chat';
 import firebase from 'firebase';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+
 
 
 /**
@@ -29,7 +31,7 @@ export class ContactsPage {
   public nameRef:firebase.database.Reference;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
     this.nameRef = firebase.database().ref('/cadastro');
 
     this.nameRef.on('value', nameList => {
