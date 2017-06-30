@@ -1,0 +1,45 @@
+<ion-content>
+  <ion-toolbar color="saindo">
+    <ion-buttons end>
+      <button ion-button icon-only (click)="logMeOut()">
+        Sair<ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col col-12 no-padding>
+        <div class="h" padding>
+
+          <div class="ic">
+            <img src="{{usuario?.imagem}}" alt="Ícone"/>
+          </div>
+          <div>
+            <h2 class="t" margin-horizontal>{{usuario?.nome}}</h2>
+            <h6 class="s" margin-bottom>{{usuario?.turma}} - {{usuario?.curso}}</h6>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+    <ion-card *ngFor="let item of items">
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="{{item?.imagemBanco}}"/>
+        </ion-avatar>
+        <h2>{{item?.nome}}</h2>
+        <h3>{{item?.data | date}}</h3>
+        <ion-note item-right>
+          {{item?.data | date:'HH:mm'}}
+        </ion-note>
+      </ion-item>
+
+      <img src={{item?.imagem}} width="auto" heigth="auto"/>
+
+      <ion-card-content>
+        <p>{{item?.texto}}</p>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

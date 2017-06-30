@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar color="crimson">
+    <ion-title text-center>
+      Cadastrar-se
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="signup">
+  <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
+
+    <p text-center *ngIf="htmlYouWantToAdd" [innerHTML]="htmlYouWantToAdd"></p>
+
+    <div class="fileupload">
+      <button block ion-button  color="primary">Selecionar arquivo
+        <input type="file" (change)="atualizaArquivo($event)"/>
+      </button>
+    </div>
+    
+    <ion-item>
+      <ion-label stacked>Nome</ion-label>
+        <ion-input formControlName="name" type="text" placeholder="Maria José" [class.invalid]="!signupForm.controls.name.valid && signupForm.controls.name.dirty"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Insituição</ion-label>
+      <ion-select formControlName="institute" [class.invalid]="!signupForm.controls.institute.valid && signupForm.controls.institute.dirty" >
+        <ion-option value="IF Goiano - Campus Trindade">IF Goiano - Campus Trindade</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Curso</ion-label>
+      <ion-select formControlName="curse" [class.invalid]="!signupForm.controls.curse.valid && signupForm.controls.curse.dirty"  >
+          <ion-option value="Automação">Automação</ion-option>
+          <ion-option value="Edificações">Edificações</ion-option>
+          <ion-option value="Eletrotécnica">Eletrotécnica</ion-option>
+          <ion-option value="Informática">Informática</ion-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label stacked>Turma</ion-label>
+      <ion-select formControlName="turma" [class.invalid]="!signupForm.controls.turma.valid && signupForm.controls.turma.dirty" >
+         <ion-option value="1° Ano">1° Ano</ion-option>
+         <ion-option value="2° Ano">2° Ano</ion-option>
+         <ion-option value="3° Ano">3° Ano</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input formControlName="email" type="email" placeholder="maria.jose@gmail.com"
+        [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid  && signupForm.controls.email.dirty">
+      <p>Por favor, digite um email válido.</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Senha</ion-label>
+      <ion-input formControlName="password" type="password" placeholder="Sua senha"
+        [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!signupForm.controls.password.valid  && signupForm.controls.password.dirty">
+      <p>Sua senha deve ter 6 ou mais caracteres.</p>
+    </ion-item>
+
+    <button [disabled]="!signupForm.valid" ion-button block type="submit">
+      Cadastrar
+    </button>
+
+  </form>
+
+</ion-content>

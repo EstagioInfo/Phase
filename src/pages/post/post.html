@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Adicionar</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="dark" (click)="enviarArquivo()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="fileupload">
+    <button block ion-button color="primary">Selecionar arquivo...
+      <input type="file" (change)="atualizaArquivo($event)" [(ngModel)]="imagem"/>
+    </button>
+  </div>
+  <ion-list no-padding>
+    <ion-item no-padding>
+      <ion-textarea rows="2" type="text" value="" placeholder="Digite aqui..." [(ngModel)]="mensagem"></ion-textarea>
+    </ion-item>
+  </ion-list>
+</ion-content>

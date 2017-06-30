@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="crimson">
+    <ion-title text-center>Mural</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of lista | async">
+
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="{{item.imagemBanco}}">
+      </ion-avatar>
+      <h2 >{{item.nome}}</h2>
+      <h3>{{item.data | date}}</h3>
+      <ion-note item-right>
+        {{item.data | date:'HH:mm'}}
+      </ion-note>
+    </ion-item>
+
+    <img src={{item.imagem}} width="auto" heigth="auto">
+
+    <ion-card-content>
+      <p>{{item.texto}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="postar()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

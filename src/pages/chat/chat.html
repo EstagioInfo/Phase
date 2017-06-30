@@ -1,0 +1,32 @@
+<ion-header header-theme>
+  <ion-navbar>
+    <ion-title></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content theme>
+  <div padding class="chat-view" id="chat-view">
+    <div class="messages">
+      <div class="chat_message_wrapper" *ngFor="let chat of chats | async" >
+        <ul class="chat_message" *ngIf="this.usuario.id">
+          <li>
+            <span>{{chat.message}}</span>
+            <span class="timestamp">{{chat.dateTime | date:'HH:mm'}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <section no-padding no-margin class="typing-container">
+    <ion-row no-margin >
+      <ion-col col-10>
+        <ion-input type="text"  placeholder="Digite aqui..."[(ngModel)]="message"></ion-input>
+      </ion-col>
+      <ion-col col-2 no-padding>
+        <button ion-button full no-margin large (click)="sendMessage()"><ion-icon name="md-send"></ion-icon></button>
+      </ion-col>
+    </ion-row>
+  </section>
+</ion-footer>
