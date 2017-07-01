@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component,Inject } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoginPage } from '../login/login';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
+import { FirebaseApp } from 'angularfire2';
 
 
 @IonicPage()
@@ -11,6 +12,8 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} 
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+  excluir2;
+  referencia: any;
   ref: FirebaseObjectObservable<any>;
   usuario: any;
   usuario2: any;
@@ -21,7 +24,9 @@ export class ProfilePage {
     'Excluir'
    ]; 
   
-  constructor(public navCtrl: NavController, public np: NavParams,public authProvider: AuthProvider,public af: AngularFireDatabase, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public np: NavParams,public authProvider: AuthProvider,public af: AngularFireDatabase, public alertCtrl: AlertController,  @Inject(FirebaseApp) fb:any) {
+      
+      this.referencia = fb.storage().ref();
       this.usuario2 = np.data;
       this.id = this.usuario2.uid;
       console.log(this.id);
@@ -52,7 +57,7 @@ export class ProfilePage {
       this.navCtrl.setRoot(LoginPage);
     });
   }
-  excluir(id){
+  excluir(item){
 
     let confirm = this.alertCtrl.create({
       title: 'Excluir?',
@@ -68,7 +73,16 @@ export class ProfilePage {
           text: 'Continuar',
           handler: () => {
             console.log('Agree clicked');
-            this.ref = this.af.object('/mural/'+id);
+
+            if(item.caminho!=""){
+             this.excluir2 = this.referencia.child('pasta/'+item.caminho);
+              this.excluir2.delete().then(()=>{
+                console.log("Deu certo");
+              }).catch(({
+
+             }));
+           }
+            this.ref = this.af.object('/mural/'+item.$key);
             this.ref.remove();
           }
         }

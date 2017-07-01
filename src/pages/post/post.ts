@@ -17,8 +17,8 @@ export class PostPage {
   excluir;
   i: any=0;
   lista : FirebaseListObservable<any>;
-  mensagem: string;
-  imagem: string;
+  mensagem: string ="";
+  imagem: string = "s";
   imagemDoc: string;
   doc: any;
   id: string;
@@ -52,12 +52,13 @@ export class PostPage {
     if(this.imagem!="s" && this.mensagem=="" ){
 
       let m ={
-         idUser: this.usuario.id,
+              idUser: this.usuario.id,
               imagemBanco: this.usuario.imagem,
               nome: this.usuario.nome,
               texto: "",
               imagem: this.imagem,
-              data: new Date().getTime()
+              data: new Date().getTime(),
+              caminho: this.arquivo.name
        };
        this.lista.push(m).then(() =>{
          this.mensagem = " ";
@@ -74,7 +75,8 @@ export class PostPage {
             nome: this.usuario.nome,
             texto: this.mensagem,
             imagem: "",
-            data: new Date().getTime()
+            data: new Date().getTime(),
+            caminho: ""
        };
        this.lista.push(m).then(() =>{
          this.mensagem = " ";
@@ -91,7 +93,8 @@ export class PostPage {
               nome: this.usuario.nome,
               texto: this.mensagem,
               imagem: this.imagem,
-              data: new Date().getTime()
+              data: new Date().getTime(),
+              caminho: this.arquivo.name
        };
        this.lista.push(m).then(() =>{
          this.mensagem = " ";
@@ -106,6 +109,8 @@ export class PostPage {
 
 
   atualizaArquivo(event){
+
+
     if(this.i>=1){
         this.excluir.delete().then(()=>{
           console.log("Deu certo");
