@@ -26,14 +26,23 @@
 
     <ion-card *ngFor="let item of items">
       <ion-item>
+     
         <ion-avatar item-left>
           <img src="{{item?.imagemBanco}}"/>
         </ion-avatar>
         <h2>{{item?.nome}}</h2>
         <h3>{{item?.data | date}}</h3>
         <ion-note item-right>
-          {{item?.data | date:'HH:mm'}}
+          <button ion-button  clear icon-only (click)="excluir(item.$key)">
+              Excluir
+          </button>
+
         </ion-note>
+        <h2>
+          <ion-note>
+            {{item?.data | date:'HH:mm'}}
+          </ion-note>
+        </h2>
       </ion-item>
 
       <img src={{item?.imagem}} width="auto" heigth="auto"/>

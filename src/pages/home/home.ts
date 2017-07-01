@@ -15,11 +15,27 @@ export class HomePage {
   arquivo;
   usuario: any;
   usuario2: any;
+  items: any[];
 
   constructor(public navCtrl: NavController,public authProvider: AuthProvider, public np: NavParams, public af: AngularFireDatabase) {
       this.usuario = np.data;
       this.lista = af.list('https://info2017-b6735.firebaseio.com/mural');
       
+
+      var values = [];
+      var x = 0;
+
+      this.lista.forEach(list =>{
+        for (var _i = list.length-1; _i >=0; _i--){
+          values[x] = list[_i];
+          x = x+1;
+        }
+        x = 0;
+        this.items = values;
+        values = [];
+      });
+
+
       af.object('cadastro/'+this.usuario.uid).subscribe(usuario=>{
           this.usuario2 = usuario;
       });

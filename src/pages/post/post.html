@@ -10,11 +10,14 @@
 </ion-header>
 
 <ion-content padding>
+
+  <p text-center *ngIf="htmlYouWantToAdd" [innerHTML]="htmlYouWantToAdd"></p>
   <div class="fileupload">
-    <button block ion-button color="primary">Selecionar arquivo...
-      <input type="file" (change)="atualizaArquivo($event)" [(ngModel)]="imagem"/>
-    </button>
+      <button block ion-button  color="primary">Selecionar arquivo
+        <input type="file" (change)="atualizaArquivo($event)"/>
+      </button>
   </div>
+
   <ion-list no-padding>
     <ion-item no-padding>
       <ion-textarea rows="2" type="text" value="" placeholder="Digite aqui..." [(ngModel)]="mensagem"></ion-textarea>

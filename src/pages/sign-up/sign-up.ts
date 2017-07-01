@@ -6,27 +6,26 @@ import { EmailValidator } from '../../validators/email';
 import { TabsPage } from '../tabs/tabs';
 import { FirebaseApp } from 'angularfire2';
 
-/**
- * Generated class for the SignUpPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
+
 @IonicPage()
 @Component({
   selector: 'page-sign-up',
   templateUrl: 'sign-up.html',
 })
 export class SignUpPage {
+
  htmlYouWantToAdd;
  referencia;
  arquivo;
  public signupForm:FormGroup;
  public loading:Loading;
  imagem: string = "s";
+ i: any=0;
+ excluir;
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public formBuilder: FormBuilder, public authProvider: AuthProvider, @Inject(FirebaseApp) fb: any) {
-    
+   
     this.referencia = fb.storage().ref();
 
     this.signupForm = formBuilder.group({
@@ -76,11 +75,23 @@ export class SignUpPage {
   }
 
    atualizaArquivo(event){
+
+    if(this.i>=1){
+      this.excluir.delete().then(()=>{
+        console.log("Deu certo");
+      }
+      ).catch(({
+
+      }));
+    }
+
+
     this.arquivo = event.srcElement.files[0];
 
     let caminho = this.referencia.child('usuario/'+this.arquivo.name);
-      let tarefa = caminho.put(this.arquivo);
-
+    let tarefa = caminho.put(this.arquivo);
+    this.excluir = caminho;
+    
       tarefa.on('state_changed', (snapshot)=>{
          // Acompanha os estados do upload (progresso, pausado,...)
       }, error => {
@@ -90,6 +101,13 @@ export class SignUpPage {
          console.log(tarefa.snapshot.downloadURL);
         this.imagem = tarefa.snapshot.downloadURL;
         this.htmlYouWantToAdd = '<img class="img ic" src="'+tarefa.snapshot.downloadURL+'"alt="Ícone"/>';
+        this.i=this.i+1
       });
   }
+
 }
+
+
+
+
+
