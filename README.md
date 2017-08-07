@@ -8,4 +8,4 @@
    As ferramentas utilizadas para o desenvolvimento do software foram: Ionic 3 e Firebase.
    
 # Considerações
-    O desenvolvimento desse aplicativo nos ajudou a colocar em prática tudo aquilo que foi aprendido durante os três anos do curso técnico.
+   O desenvolvimento desse aplicativo nos ajudou a colocar em prática tudo aquilo que foi aprendido durante os três anos do curso técnico.
